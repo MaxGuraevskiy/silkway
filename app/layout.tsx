@@ -1,4 +1,3 @@
-"use client";
 import "./globals.css";
 import { Inter, Roboto, Source_Sans_Pro, Manrope } from "next/font/google";
 import { Metadata } from "next";
