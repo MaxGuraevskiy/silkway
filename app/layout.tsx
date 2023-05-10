@@ -2,8 +2,8 @@ import "./globals.css";
 import { Inter, Roboto, Source_Sans_Pro, Manrope } from "next/font/google";
 import { Metadata } from "next";
 
-import { darkTheme } from "./theme/themes";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+// import { darkTheme } from "./theme/themes";
+// import { ThemeProvider, CssBaseline } from "@mui/material";
 
 import Header from "./layouts/header";
 import Footer from "./layouts/footer";
@@ -72,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       {/* <ThemeProvider theme={darkTheme}> */}
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <body
         className={
           (inter.variable, roboto.variable, sans_pro.variable, manrope.variable)

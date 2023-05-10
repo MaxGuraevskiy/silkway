@@ -1,7 +1,7 @@
 import React from "react";
 
 function Bucket() {
-  return <main>Bucket</main>;
+  return <div>Bucket</div>;
 }
 
 export default Bucket;
