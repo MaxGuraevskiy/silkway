@@ -53,29 +53,31 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header() {
   return (
     <header>
-      <Link href="/">
-        <h1 className="font-sans_pro text-white">SilkWay</h1>
-      </Link>
-
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon sx={{ fontSize: 20 }} />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-        />
-      </Search>
-
-      <div className="flex flex-row">
-        <Link href="/bucket" className="h-full justify-center">
-          <ShoppingCartCheckoutIcon sx={{ fontSize: 30, color: "white" }} />
+      <nav>
+        <Link href="/">
+          <h1 className="font-sans_pro text-white">SilkWay</h1>
         </Link>
 
-        <Link href="/profile">
-          <Button className="text-xl text-white">Profile</Button>
-        </Link>
-      </div>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon sx={{ fontSize: 20 }} />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+
+        <div className="flex flex-row">
+          <Link href="/bucket" className="h-full justify-center">
+            <ShoppingCartCheckoutIcon sx={{ fontSize: 30, color: "white" }} />
+          </Link>
+
+          <Link href="/profile">
+            <Button className="text-xl text-white">Profile</Button>
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 }

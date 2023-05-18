@@ -21,7 +21,7 @@ export default function App() {
         centeredSlides={true}
         slidesPerView={3}
         autoplay={{
-          delay: 4000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         pagination={{
