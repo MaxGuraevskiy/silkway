@@ -52,13 +52,11 @@ header {
   position: fixed;
   padding: 1rem 2rem 1rem 2rem;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   z-index: 10;
   box-shadow: 0 10px 100px rgb(0 0 0 / 10%);
-  background: rgb(var(--red));
 }
 
 main {

@@ -5,6 +5,7 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from "@mui/material/Button";
 
 const Search = styled("div")(({ theme }) => ({
@@ -53,14 +54,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header() {
   return (
     <header>
-      <nav>
+      <nav className="flex w-full flex-row justify-between items-center space-x-4">
         <Link href="/">
-          <h1 className="font-sans_pro text-white">SilkWay</h1>
+          <h1 className="font-sans_pro text-red-500">SilkWay</h1>
         </Link>
 
         <Search>
           <SearchIconWrapper>
-            <SearchIcon sx={{ fontSize: 20 }} />
+            <SearchIcon sx={{ fontSize: 20, color: 'red' }} />
           </SearchIconWrapper>
           <StyledInputBase
             placeholder="Search…"
@@ -68,13 +69,13 @@ function Header() {
           />
         </Search>
 
-        <div className="flex flex-row">
+        <div className="flex flex-row space-x-5">
           <Link href="/bucket" className="h-full justify-center">
-            <ShoppingCartCheckoutIcon sx={{ fontSize: 30, color: "white" }} />
+            <ShoppingCartCheckoutIcon sx={{ fontSize: 30, color: "red" }} />
           </Link>
 
           <Link href="/profile">
-            <Button className="text-xl text-white">Profile</Button>
+            <AccountCircleIcon sx={{fontSize: 30, color: 'red'}} />
           </Link>
         </div>
       </nav>
