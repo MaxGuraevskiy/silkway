@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter, Roboto, Source_Sans_Pro, Manrope } from "next/font/google";
 import { Metadata } from "next";
+import { Providers } from "./layouts/providers";
 
 import Header from "./layouts/header";
 import Footer from "./layouts/footer";
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   title: "SilkWay",
   description: "SilkWay",
   keywords: ["Guraevskiy", "Max Guraevskiy", "Next.js", "HSE", "SilkWay"],
-  authors: [{ name: "Max Guraevskiy", url: "https://guraevskiy.ru/" }],
+  authors: [{ name: "Max Guraevskiy", url: "" }],
   creator: "Maxim Guraevskiy",
   icons: {
     icon: "./favicon.ico",
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SilkWay",
     description: "SilkWay",
-    url: "https://guraevskiy.ru/",
+    url: "",
     siteName: "SilkWay",
     locale: "ru_ru",
     type: "website",
@@ -73,9 +74,11 @@ export default function RootLayout({
           (inter.variable, roboto.variable, sans_pro.variable, manrope.variable)
         }
       >
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

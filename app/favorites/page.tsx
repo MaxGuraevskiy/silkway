@@ -5,54 +5,58 @@ import chipsPath from "@/public/chips.jpg";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import { useAppSelector, useAppDispatch } from "@/lib/redux/hooks";
-import {
-  addItem,
-  deleteItem,
-  plusItemAmount,
-  minusItemAmount,
-} from "@/lib/redux/slices/itemSlice";
+import { likeItem, unlikeItem } from "@/lib/redux/slices/favoritesSlice";
 
-import type { Item, BucketItem } from "@/lib/redux/slices/itemSlice";
+import type { Item } from "@/lib/redux/slices/itemSlice";
 
-import "./page.css";
+import "../bucket/page.css";
 
 const asd: Item = {
   id: "1",
   price: 123,
   currency: "",
   name: "qwe",
-  description: "",
+  description: "asd",
   images: [],
 };
 
-const qwe: BucketItem = {
-  item: asd,
-  amount: 1,
-};
-
 function Bucket() {
-  const items = useAppSelector((state) => state.items);
+  const items = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
 
-  const BucketRow = ({ item, amount }: BucketItem) => {
+  const BucketRow = ({
+    id,
+    price,
+    currency,
+    name,
+    description,
+    images,
+  }: Item) => {
     return (
       <div className="w-full flex flex-row ">
         <div className="w-[20%] row">
           <Image src={chipsPath} alt="" className="w-60 h-60" />
         </div>
-        <div className="w-[40%] row">
-          <h3>{item.name}</h3>
-        </div>
-        <div className="w-[10%] row">
-          <h3>{amount}</h3>
+        <div className="w-[50%] row flex flex-col">
+          <h3>{name}</h3>
+          <p>{description}</p>
         </div>
         <div className="w-[20%] row">
-          <h3>{item.price}</h3>
+          <h3>{price}</h3>
         </div>
         <div className="w-[10%] row">
           <div
             onClick={() => {
-              dispatch(deleteItem({ item, amount }));
+              dispatch(
+                unlikeItem({
+                  id,
+                  price,
+                  currency,
+                  name,
+                  description,
+                  images,
+                })
+              );
             }}
             className="cursor-pointer"
           >
@@ -71,11 +75,8 @@ function Bucket() {
           <div className="w-[20%] h-28 row">
             <h2>Фото</h2>
           </div>
-          <div className="w-[40%] h-28 row">
+          <div className="w-[50%] h-28 row">
             <h2>Описание</h2>
-          </div>
-          <div className="w-[10%] h-28 row">
-            <h2>Кол-во</h2>
           </div>
           <div className="w-[20%] h-28 row">
             <h2>Стоимость</h2>
@@ -88,7 +89,14 @@ function Bucket() {
         <div className="flex flex-col w-full space-y-5 ">
           {items.map((x) => (
             <>
-              <BucketRow item={x.item} amount={x.amount} />
+              <BucketRow
+                id={x.id}
+                price={x.price}
+                currency={x.currency}
+                name={x.name}
+                description={x.description}
+                images={x.images}
+              />
               <div className="w-full border-solid border-black border-[1px]"></div>
             </>
           ))}
@@ -96,7 +104,7 @@ function Bucket() {
 
         <button
           onClick={() => {
-            dispatch(addItem(qwe));
+            dispatch(likeItem(asd));
           }}
           className="w-40 h-40"
         />

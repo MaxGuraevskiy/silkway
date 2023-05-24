@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Button from "@mui/material/Button";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+
 // import { styled, alpha } from "@mui/material/styles";
 // import InputBase from "@mui/material/InputBase";
 // import SearchIcon from "@mui/icons-material/Search";
@@ -70,10 +72,12 @@ function Header() {
         </Search> */}
 
         <div className="flex flex-row space-x-5">
+          <Link href="/favorites" className="h-full justify-center">
+            <FavoriteBorderIcon sx={{ fontSize: 30, color: "red" }} />
+          </Link>
           <Link href="/bucket" className="h-full justify-center">
             <ShoppingCartCheckoutIcon sx={{ fontSize: 30, color: "red" }} />
           </Link>
-
           <Link href="/profile">
             <AccountCircleIcon sx={{ fontSize: 30, color: "red" }} />
           </Link>
