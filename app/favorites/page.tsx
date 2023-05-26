@@ -87,12 +87,12 @@ function Favorites() {
               ))}
             </div>
           )}
-          <button
+          {/* <button
             onClick={() => {
               dispatch(likeItem(data[Math.floor(Math.random() * 21)]));
             }}
             className="w-40 h-40"
-          />
+          /> */}
         </div>
       </section>
     </main>

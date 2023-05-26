@@ -83,7 +83,7 @@ function Bucket() {
             </div>
           )}
 
-          <button
+          {/* <button
             onClick={() => {
               dispatch(
                 addItem({
@@ -93,7 +93,7 @@ function Bucket() {
               );
             }}
             className="w-40 h-40"
-          />
+          /> */}
         </div>
       </section>
     </main>
