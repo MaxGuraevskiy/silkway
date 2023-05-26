@@ -126,7 +126,7 @@ const Section2 = () => {
       <div className="w-full flex small:flex-row flex-col justify-center items-center">
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
+          id="combo-box-category"
           options={category}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Категория" />}
@@ -134,7 +134,7 @@ const Section2 = () => {
         />
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
+          id="combo-box-sortingBy"
           options={sortingBy}
           sx={{ width: 300 }}
           renderInput={(params) => (
@@ -144,7 +144,7 @@ const Section2 = () => {
         />
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
+          id="combo-box-countOfItems"
           options={countOfItems}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Количество" />}
