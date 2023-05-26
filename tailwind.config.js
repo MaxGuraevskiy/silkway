@@ -16,6 +16,9 @@ module.exports = {
         small: "56.25em",
         medium: "75em",
         large: "112.5em",
+
+        tel: "600px",
+        wide: "1000px",
       },
       fontFamily: {
         sans_pro: ["var(--font-sans-pro)"],

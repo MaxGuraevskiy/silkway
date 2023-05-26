@@ -7,7 +7,10 @@ const favoritesSlice = createSlice({
   initialState: [] as Item[],
   reducers: {
     likeItem: (state, action: PayloadAction<Item>) => {
-      state.push(action.payload);
+      const index = state.findIndex((x) => x.id === action.payload.id);
+      if (index === -1) {
+        state.push(action.payload);
+      }
     },
 
     unlikeItem: (state, action: PayloadAction<Item>) => {

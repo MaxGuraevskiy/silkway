@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import chipsPath from "@/public/chips.jpg";
+import { useRouter } from "next/navigation";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import { useAppSelector, useAppDispatch } from "@/lib/redux/hooks";
@@ -14,45 +14,41 @@ import {
 
 import type { Item, BucketItem } from "@/lib/redux/slices/itemSlice";
 
+import data from "@/lib/components/testData";
+
 import "./page.css";
-
-const asd: Item = {
-  id: "1",
-  price: 123,
-  currency: "",
-  name: "qwe",
-  description: "",
-  images: [],
-};
-
-const qwe: BucketItem = {
-  item: asd,
-  amount: 1,
-};
 
 function Bucket() {
   const items = useAppSelector((state) => state.items);
   const dispatch = useAppDispatch();
 
-  const BucketRow = ({ item, amount }: BucketItem) => {
+  const router = useRouter();
+
+  const BucketRow = (bucketItem: BucketItem) => {
     return (
-      <div className="w-full flex flex-row ">
-        <div className="w-[20%] row">
-          <Image src={chipsPath} alt="" className="w-60 h-60" />
+      <div className="row space-x-2">
+        <div className=" cell">
+          <Image
+            src={bucketItem.item.images[0]}
+            alt=""
+            width={240}
+            height={240}
+            className="w-60 h-60 rounded-2xl"
+          />
         </div>
-        <div className="w-[40%] row">
-          <h3>{item.name}</h3>
+        <div className="cell">
+          <h3>{bucketItem.item.name}</h3>
         </div>
-        <div className="w-[10%] row">
-          <h3>{amount}</h3>
-        </div>
-        <div className="w-[20%] row">
-          <h3>{item.price}</h3>
-        </div>
-        <div className="w-[10%] row">
+        <div className=" cell space-x-5 small:space-x-10 ">
+          <h3>{bucketItem.amount}шт.</h3>
+          <h3>
+            {bucketItem.item.price} {bucketItem.item.currency}.
+          </h3>
           <div
-            onClick={() => {
-              dispatch(deleteItem({ item, amount }));
+            id={`deleteItem${bucketItem.item.id}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(deleteItem(bucketItem));
             }}
             className="cursor-pointer"
           >
@@ -64,42 +60,40 @@ function Bucket() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 space-y-10">
+    <main className="flex min-h-screen flex-col items-center space-y-10">
       <section>
-        {/* Оглавление таблицы корзины */}
-        <div className="w-full flex flex-row ">
-          <div className="w-[20%] h-28 row">
-            <h2>Фото</h2>
-          </div>
-          <div className="w-[40%] h-28 row">
-            <h2>Описание</h2>
-          </div>
-          <div className="w-[10%] h-28 row">
-            <h2>Кол-во</h2>
-          </div>
-          <div className="w-[20%] h-28 row">
-            <h2>Стоимость</h2>
-          </div>
-          <div className="w-[10%] h-28 row">
-            <h2>Удалить</h2>
-          </div>
-        </div>
+        <div className="w-full flex flex-col items-center">
+          {items.length === 0 ? (
+            <h3>Ваша корзина пуста</h3>
+          ) : (
+            <div className="flex flex-col w-full space-y-5 ">
+              {items.map((x) => (
+                <div
+                  id={`itemLink${x.item.id}`}
+                  className="text-black hover:animate-pulse hover:border-solid rounded-2xl"
+                  onClick={(event) => {
+                    router.push(`/item/${x.item.id}`);
+                  }}
+                >
+                  <BucketRow item={x.item} amount={x.amount} />
+                  <div className="w-full border-solid border-black border-[1px]"></div>
+                </div>
+              ))}
+            </div>
+          )}
 
-        <div className="flex flex-col w-full space-y-5 ">
-          {items.map((x) => (
-            <>
-              <BucketRow item={x.item} amount={x.amount} />
-              <div className="w-full border-solid border-black border-[1px]"></div>
-            </>
-          ))}
+          <button
+            onClick={() => {
+              dispatch(
+                addItem({
+                  item: data[Math.floor(Math.random() * 21)],
+                  amount: 1,
+                })
+              );
+            }}
+            className="w-40 h-40"
+          />
         </div>
-
-        <button
-          onClick={() => {
-            dispatch(addItem(qwe));
-          }}
-          className="w-40 h-40"
-        />
       </section>
     </main>
   );

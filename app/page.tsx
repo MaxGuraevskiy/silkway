@@ -4,7 +4,7 @@ import Section2 from "./sections/section2/section2";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 space-y-10">
+    <main className="flex min-h-screen flex-col items-center space-y-10">
       <Section1 />
       <Section2 />
     </main>

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import chipsPath from "@/public/chips.jpg";
+import { useRouter } from "next/navigation";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import { useAppSelector, useAppDispatch } from "@/lib/redux/hooks";
@@ -9,54 +9,42 @@ import { likeItem, unlikeItem } from "@/lib/redux/slices/favoritesSlice";
 
 import type { Item } from "@/lib/redux/slices/itemSlice";
 
+import data from "@/lib/components/testData";
+
 import "../bucket/page.css";
+import Link from "next/link";
 
-const asd: Item = {
-  id: "1",
-  price: 123,
-  currency: "",
-  name: "qwe",
-  description: "asd",
-  images: [],
-};
-
-function Bucket() {
+function Favorites() {
   const items = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  const BucketRow = ({
-    id,
-    price,
-    currency,
-    name,
-    description,
-    images,
-  }: Item) => {
+  const FavoritesRow = (item: Item) => {
     return (
-      <div className="w-full flex flex-row ">
-        <div className="w-[20%] row">
-          <Image src={chipsPath} alt="" className="w-60 h-60" />
+      <div className="row space-x-2">
+        <div className=" cell">
+          <Image
+            src={item.images[0]}
+            alt=""
+            width={240}
+            height={240}
+            className="w-60 h-60 rounded-2xl"
+          />
         </div>
-        <div className="w-[50%] row flex flex-col">
-          <h3>{name}</h3>
-          <p>{description}</p>
+        <div className=" cell flex flex-col">
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
         </div>
-        <div className="w-[20%] row">
-          <h3>{price}</h3>
+        <div className=" cell">
+          <h3>
+            {item.price} {item.currency}.
+          </h3>
         </div>
-        <div className="w-[10%] row">
+        <div className=" cell">
           <div
-            onClick={() => {
-              dispatch(
-                unlikeItem({
-                  id,
-                  price,
-                  currency,
-                  name,
-                  description,
-                  images,
-                })
-              );
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(unlikeItem(item));
             }}
             className="cursor-pointer"
           >
@@ -68,49 +56,46 @@ function Bucket() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 space-y-10">
+    <main className="flex min-h-screen flex-col items-center space-y-10">
       <section>
-        {/* Оглавление таблицы корзины */}
-        <div className="w-full flex flex-row ">
-          <div className="w-[20%] h-28 row">
-            <h2>Фото</h2>
-          </div>
-          <div className="w-[50%] h-28 row">
-            <h2>Описание</h2>
-          </div>
-          <div className="w-[20%] h-28 row">
-            <h2>Стоимость</h2>
-          </div>
-          <div className="w-[10%] h-28 row">
-            <h2>Удалить</h2>
-          </div>
+        <div className="w-full flex flex-col items-center">
+          {items.length === 0 ? (
+            <h3>Товаров в избранном нет</h3>
+          ) : (
+            <div className="flex flex-col w-full space-y-5 ">
+              {items.map((x) => (
+                <div
+                  className="text-black hover:animate-pulse hover:border-solid rounded-2xl py-5 px-3 flex flex-col justify-between shadow-lg"
+                  onClick={(event) => {
+                    router.push(`/item/${x.id}`);
+                  }}
+                >
+                  <FavoritesRow
+                    id={x.id}
+                    price={x.price}
+                    currency={x.currency}
+                    name={x.name}
+                    description={x.description}
+                    images={x.images}
+                    minQuota={x.minQuota}
+                    maxAbility={x.maxAbility}
+                    category={x.category}
+                  />
+                  {/* <div className="w-full border-solid border-black border-[1px]"></div> */}
+                </div>
+              ))}
+            </div>
+          )}
+          <button
+            onClick={() => {
+              dispatch(likeItem(data[Math.floor(Math.random() * 21)]));
+            }}
+            className="w-40 h-40"
+          />
         </div>
-
-        <div className="flex flex-col w-full space-y-5 ">
-          {items.map((x) => (
-            <>
-              <BucketRow
-                id={x.id}
-                price={x.price}
-                currency={x.currency}
-                name={x.name}
-                description={x.description}
-                images={x.images}
-              />
-              <div className="w-full border-solid border-black border-[1px]"></div>
-            </>
-          ))}
-        </div>
-
-        <button
-          onClick={() => {
-            dispatch(likeItem(asd));
-          }}
-          className="w-40 h-40"
-        />
       </section>
     </main>
   );
 }
 
-export default Bucket;
+export default Favorites;

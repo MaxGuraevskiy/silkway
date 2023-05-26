@@ -40,12 +40,12 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
 }
 
 header {
@@ -56,7 +56,7 @@ header {
   align-items: center;
   width: 100%;
   z-index: 10;
-  box-shadow: 0 10px 10px rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 10px rgb(0 0 0 / 10%);
 }
 
 main {
@@ -82,7 +82,6 @@ footer {
   width: 100%;
   z-index: 10;
   box-shadow: 0 10px 100px rgb(0 0 0 / 10%);
-  background: rgb(var(--red));
 }
 
 @media only screen and (max-width: 75em) {
@@ -98,6 +97,7 @@ footer {
 
   main {
     padding-top: 63px;
+    /* padding: 1rem 0; */
   }
 }
 
@@ -137,12 +137,7 @@ p {
 }
 
 *::-webkit-scrollbar-track {
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: none;
 }
 
 *::-webkit-scrollbar-thumb {

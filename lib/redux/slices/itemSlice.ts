@@ -7,7 +7,10 @@ export type Item = {
   currency: string;
   name: string;
   description: string;
-  images: any[];
+  images: string[];
+  minQuota: number;
+  maxAbility: number;
+  category: string;
 };
 
 export type BucketItem = {
@@ -20,7 +23,14 @@ const itemSlice = createSlice({
   initialState: [] as BucketItem[],
   reducers: {
     addItem: (state, action: PayloadAction<BucketItem>) => {
-      state.push(action.payload);
+      const index = state.findIndex(
+        (x) => x.item.id === action.payload.item.id
+      );
+      if (index !== -1 && state[index].amount > 0) {
+        state[index].amount += action.payload.amount;
+      } else {
+        state.push(action.payload);
+      }
     },
 
     deleteItem: (state, action: PayloadAction<BucketItem>) => {
