@@ -161,8 +161,9 @@ const Section2 = () => {
         />
       </Search>
       <div className="flex flex-row justify-between flex-wrap">
-        {data.map((x) => (
+        {data.map((x, i) => (
           <ItemCard
+            key={`item-card-${i}-${x.name}`}
             id={x.id}
             price={x.price}
             currency={x.currency}

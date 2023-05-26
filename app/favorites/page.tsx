@@ -65,6 +65,7 @@ function Favorites() {
             <div className="flex flex-col w-full space-y-5 ">
               {items.map((x) => (
                 <div
+                  key={`item-key-${x.id}`}
                   className="text-black hover:animate-pulse hover:border-solid rounded-2xl py-5 px-3 flex flex-col justify-between shadow-lg"
                   onClick={(event) => {
                     router.push(`/item/${x.id}`);

@@ -95,8 +95,9 @@ const Section1 = () => {
           },
         }}
       >
-        {ads.map((x) => (
+        {ads.map((x, i) => (
           <SwiperSlide
+          key={`ad-${i}-${x.id}`}
             className="hover:cursor-pointer"
             onClick={() => handleOpen(x.id)}
           >
